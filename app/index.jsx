@@ -5,17 +5,20 @@ const pomodoro = [
   {
     id: 'focus',
     initialValue: 25,
-    image: require('./pomodoro.svg')
+    image: require('./pomodoro.svg'),
+    display: 'Foco'
   },
   {
     id: 'short',
     initialValue: 5,
-    image: require('./short.svg')
+    image: require('./short.svg'),
+    display: 'Pausa curta'
   },
   {
     id: 'long',
     initialValue: 15,
-    image: require('./short.svg')
+    image: require('./long.svg'),
+    display: 'Pausa longa'
   },
 ]
 
@@ -30,30 +33,22 @@ export default function Index() {
       <Image source={timerType.image} style={styles.image}/>
       <View style={styles.actions}>
       <View style={styles.context}>
-        <Pressable style={styles.contextButtonActive}>
-          <Text style={styles.contextButtonText}>
-            Foco
-          </Text>
-        </Pressable>
-        <Pressable>
-          <Text style={styles.contextButtonText}>
-            Pausa curta
-          </Text>
-        </Pressable>
-        <Pressable>
-          <Text style={styles.contextButtonText}>
-            Pausa longa
-          </Text>
-        </Pressable>
+        {pomodoro.map(p => (
+          <Pressable 
+            key={p.id}
+            style={timerType.id === p.id ? styles.contextButtonActive : null}
+            onPress={() => setTimerType(p)}
+          >
+            <Text style={styles.contextButtonText}>
+              {p.display}
+            </Text>
+          </Pressable>
+        ))}
       </View>
         <Text style={styles.timer}>
-          25:00
+          { new Date(timerType.initialValue * 1000).toLocaleTimeString('pt-BR', {minute: '2-digit', second: '2-digit'}) }
         </Text>
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>
-            Começar
-          </Text>
-        </Pressable>
+        
       </View>
     </View>
   );
