@@ -37,6 +37,7 @@ export default function Index() {
   const clear = () => {
     if (timerRef.current != null) {
     clearInterval(timerRef.current)
+    timerRef.current = null
     setTimerRunning(false)
     }
   }
