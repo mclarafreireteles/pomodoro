@@ -3,23 +3,24 @@ import { Image, StyleSheet, View } from "react-native";
 import { FokusButton } from "../components/FokusButton/index";
 import { ActionButton } from "../components/ActionButton";
 import { Timer } from "../components/Timer";
+import { IconPause, IconPlay } from "../components/icons";
 
 const pomodoro = [
   {
     id: 'focus',
-    initialValue: 25,
+    initialValue: 25 * 60,
     image: require('./pomodoro.svg'),
     display: 'Foco'
   },
   {
     id: 'short',
-    initialValue: 5,
+    initialValue: 5 * 60,
     image: require('./short.svg'),
     display: 'Pausa curta'
   },
   {
     id: 'long',
-    initialValue: 15,
+    initialValue: 15 * 60,
     image: require('./long.svg'),
     display: 'Pausa longa'
   },
@@ -40,8 +41,9 @@ export default function Index() {
     }
   }
 
-  const toggleTimerType = (newTimerType) => {
+  const toggleTimerType = (newTimerType) => { 
     setTimerType(newTimerType)
+    setSeconds(newTimerType.initialValue)
     clear()
   }
 
@@ -51,8 +53,15 @@ export default function Index() {
       return
     }
     setTimerRunning(true)
+
     const id = setInterval(() => {
-      console.log('timer rolando')
+      setSeconds(oldState => {
+        if (oldState === 0) {
+          clear()
+          return timerType.initialValue
+        }
+        return oldState - 1
+      })
     }, 1000)
 
     timerRef.current = id
@@ -75,10 +84,11 @@ export default function Index() {
         ))}
       </View>
         <Timer 
-          totalSeconds={timerType.initialValue}
+          totalSeconds={seconds}
         />
         <FokusButton 
           title={timerRunning ? 'Pausar' : 'Começar'}
+          icon={timerRunning ?  <IconPause/> : <IconPlay/>}
           onPress={toggleTimer}
         />
       </View>
