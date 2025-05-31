@@ -72,18 +72,18 @@ export default function Pomodoro() {
     <View
       style={styles.container}
     >
-      <Image source={timerType.image} style={styles.image}/>
+      <Image source={timerType.image} style={styles.image}  resizeMode="contain"/>
       <View style={styles.actions}>
-      <View style={styles.context}>
-        {pomodoro.map(p => (
-          <ActionButton 
-            key={p.id}
-            active={ timerType.id === p.id }
-            onPress={() => toggleTimerType(p)}
-            display={p.display}
-          />
-        ))}
-      </View>
+        <View style={styles.context}>
+          {pomodoro.map(p => (
+            <ActionButton 
+              key={p.id}
+              active={ timerType.id === p.id }
+              onPress={() => toggleTimerType(p)}
+              display={p.display}
+            />
+          ))}
+        </View>
         <Timer 
           totalSeconds={seconds}
         />

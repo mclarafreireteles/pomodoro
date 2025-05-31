@@ -7,6 +7,10 @@ export default function Layout() {
                 name="pomodoro" 
                 options={{ headerShown: false }} 
             />
+            <Stack.Screen 
+                name="index" 
+                options={{ headerShown: false }} 
+            />
         </Stack>
     )
 }
