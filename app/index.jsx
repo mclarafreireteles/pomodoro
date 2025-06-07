@@ -5,7 +5,7 @@ import { FokusLogo } from "../components/icons"
 export default function Index() {
   return (
     <View style={styles.container}>
-      <FokusLogo/> 
+    <FokusLogo/> 
       <Text style={styles.texto}>
         Otimize sua produtividade, mergulhe no que importa
       </Text>
