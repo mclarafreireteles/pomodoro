@@ -1,4 +1,5 @@
 import { View, Text } from "react-native";
+import TaskItem from "../../components/TaskItem";
 
 export default function Tasks () {
     return (
@@ -6,6 +7,13 @@ export default function Tasks () {
             <Text>
                 Página para listar tarefas
             </Text>
+            <TaskItem 
+                completed
+                text="Estudar React"
+            />
+            <TaskItem 
+                text="Estudar React Native"
+            />
         </View>
     )
 }
